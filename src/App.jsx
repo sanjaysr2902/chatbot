@@ -13,9 +13,18 @@ import "./App.css";
 function App() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [user, setUser] = useState(localStorage.getItem("user") || "");
 
-  const user = "Sanjay";
-  const gf = "Sarangi";
+  // 🔥 Ask username once
+  useEffect(() => {
+    if (!user) {
+      const name = prompt("Enter your name:");
+      if (name) {
+        setUser(name);
+        localStorage.setItem("user", name);
+      }
+    }
+  }, []);
 
   // 🔥 Real-time messages
   useEffect(() => {
@@ -38,7 +47,7 @@ function App() {
 
     await addDoc(collection(db, "messages"), {
       text: message,
-      user,
+      user: user,
       createdAt: serverTimestamp()
     });
 
@@ -50,7 +59,7 @@ function App() {
 
       {/* HEADER */}
       <div className="chat-header">
-        {gf} 💙
+        💙 Chat with Love 💙
       </div>
 
       {/* CHAT BODY */}
@@ -62,6 +71,7 @@ function App() {
               msg.user === user ? "sent" : "received"
             }`}
           >
+            <span className="username">{msg.user}</span>
             {msg.text}
           </div>
         ))}
@@ -72,6 +82,12 @@ function App() {
         <input
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              sendMessage();
+            }
+          }}
           placeholder="Send something..."
         />
         <button onClick={sendMessage}>Send 🚀</button>

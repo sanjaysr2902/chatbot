@@ -1,11 +1,10 @@
-/* BASE */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
 }
 
-/* 🌈 SKY BACKGROUND ANIMATION */
+/* 🌈 SKY BACKGROUND */
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -23,7 +22,7 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* ☁️ CLOUDS (NO IMAGE) */
+/* ☁️ CLOUDS */
 .chat-container::before {
   content: "";
   position: absolute;
@@ -42,7 +41,7 @@ body {
   100% { transform: translateX(-50%); }
 }
 
-/* ✨ STARS / PARTICLES */
+/* ✨ STARS */
 .chat-container::after {
   content: "";
   position: absolute;
@@ -85,20 +84,27 @@ body {
 .message {
   max-width: 60%;
   padding: 10px;
-  margin: 5px 0;
+  margin: 8px 0;
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
-/* SENT */
+/* RIGHT */
 .sent {
-  background: #ffffffcc;
+  background: #d1ffd6;
   align-self: flex-end;
 }
 
-/* RECEIVED */
+/* LEFT */
 .received {
   background: white;
   align-self: flex-start;
+}
+
+.username {
+  font-size: 10px;
+  color: gray;
 }
 
 /* INPUT */
