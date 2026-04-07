@@ -32,28 +32,15 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // 🚀 Send message + sky animation
+  // 🚀 Send message
   const sendMessage = async () => {
     if (message.trim() === "") return;
 
-    const text = message;
-
     await addDoc(collection(db, "messages"), {
-      text,
+      text: message,
       user,
       createdAt: serverTimestamp()
     });
-
-    // 🌟 Create floating sky bubble
-    const bubble = document.createElement("div");
-    bubble.className = "sky-bubble";
-    bubble.innerText = text;
-
-    document.body.appendChild(bubble);
-
-    setTimeout(() => {
-      bubble.remove();
-    }, 3000);
 
     setMessage("");
   };
@@ -85,7 +72,7 @@ function App() {
         <input
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Send something to the sky..."
+          placeholder="Send something..."
         />
         <button onClick={sendMessage}>Send 🚀</button>
       </div>
