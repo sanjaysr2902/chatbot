@@ -17,12 +17,9 @@ function App() {
   const user = "Sanjay";
   const gf = "Sarangi";
 
-  // 🔥 Real-time listener
+  // 🔥 Real-time messages
   useEffect(() => {
-    const q = query(
-      collection(db, "messages"),
-      orderBy("createdAt")
-    );
+    const q = query(collection(db, "messages"), orderBy("createdAt"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const msgs = snapshot.docs.map((doc) => ({
@@ -35,15 +32,28 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // 📤 Send message
+  // 🚀 Send message + sky animation
   const sendMessage = async () => {
     if (message.trim() === "") return;
 
+    const text = message;
+
     await addDoc(collection(db, "messages"), {
-      text: message,
-      user: user,
+      text,
+      user,
       createdAt: serverTimestamp()
     });
+
+    // 🌟 Create floating sky bubble
+    const bubble = document.createElement("div");
+    bubble.className = "sky-bubble";
+    bubble.innerText = text;
+
+    document.body.appendChild(bubble);
+
+    setTimeout(() => {
+      bubble.remove();
+    }, 3000);
 
     setMessage("");
   };
@@ -53,7 +63,7 @@ function App() {
 
       {/* HEADER */}
       <div className="chat-header">
-        {gf} 💚
+        {gf} 💙
       </div>
 
       {/* CHAT BODY */}
@@ -75,9 +85,9 @@ function App() {
         <input
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type a message..."
+          placeholder="Send something to the sky..."
         />
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={sendMessage}>Send 🚀</button>
       </div>
 
     </div>
