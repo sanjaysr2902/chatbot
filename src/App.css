@@ -1,19 +1,29 @@
-/* 🌌 SKY BACKGROUND */
+/* 🌌 BASE */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
 }
 
+/* 🌈 SKY GRADIENT ANIMATION */
 .chat-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(to top, #1e3c72, #2a5298, #87ceeb);
   position: relative;
+
+  background: linear-gradient(270deg, #1e3c72, #2a5298, #87ceeb);
+  background-size: 600% 600%;
+  animation: skyMove 12s ease infinite;
 }
 
-/* ☁️ MOVING CLOUDS */
+@keyframes skyMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ☁️ CLOUDS */
 .chat-container::before {
   content: "";
   position: absolute;
@@ -27,6 +37,23 @@ body {
 @keyframes clouds {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+/* ✨ FLOATING PARTICLES */
+.chat-container::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(white 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: particles 20s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes particles {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-200px); }
 }
 
 /* HEADER */
@@ -63,7 +90,7 @@ body {
 
 /* RECEIVED */
 .received {
-  background: #ffffff;
+  background: white;
   align-self: flex-start;
 }
 
@@ -89,29 +116,4 @@ body {
   color: white;
   border: none;
   border-radius: 20px;
-  cursor: pointer;
-}
-
-/* 🌟 FLOATING MESSAGE */
-.sky-bubble {
-  position: fixed;
-  bottom: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  padding: 10px 15px;
-  border-radius: 20px;
-  animation: floatUp 3s ease-out forwards;
-  z-index: 999;
-}
-
-@keyframes floatUp {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -400px);
-  }
 }
