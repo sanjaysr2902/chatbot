@@ -52,7 +52,7 @@ function App() {
     <div className="chat-container">
       {/* HEADER */}
       <div className="chat-header">
-        <h2>{gf} ❤️</h2>
+        <h2>{gf} </h2>
       </div>
 
       {/* CHAT BODY */}
