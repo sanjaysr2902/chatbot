@@ -1,20 +1,30 @@
-/* Full screen */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Main container */
+/* 🌈 Animated Background */
 .chat-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #ece5dd;
+
+  background: linear-gradient(270deg, #075e54, #25d366, #128c7e);
+  background-size: 600% 600%;
+
+  animation: gradientMove 10s ease infinite;
+}
+
+/* Animation */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Header */
 .chat-header {
-  background: #075e54;
+  background: rgba(0,0,0,0.2);
   color: white;
   padding: 15px;
   text-align: center;
@@ -27,34 +37,35 @@ body {
   flex: 1;
   padding: 10px;
   overflow-y: auto;
+  backdrop-filter: blur(10px);
 }
 
-/* Messages */
+/* Message */
 .message {
   max-width: 60%;
   padding: 10px;
   margin: 5px 0;
-  border-radius: 10px;
-  word-wrap: break-word;
+  border-radius: 12px;
+  color: black;
 }
 
-/* Sent message */
+/* Sent */
 .message.sent {
   background: #dcf8c6;
   align-self: flex-end;
 }
 
-/* Received message */
+/* Received */
 .message.received {
   background: white;
   align-self: flex-start;
 }
 
-/* Input area */
+/* Input */
 .chat-input {
   display: flex;
   padding: 10px;
-  background: #f0f0f0;
+  background: rgba(255,255,255,0.2);
 }
 
 /* Input box */
@@ -66,7 +77,7 @@ body {
   outline: none;
 }
 
-/* Send button */
+/* Button */
 .chat-input button {
   margin-left: 10px;
   padding: 10px 15px;
