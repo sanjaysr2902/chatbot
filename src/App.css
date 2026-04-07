@@ -33,13 +33,13 @@ body {
   border-radius: 10px;
 }
 
-/* SENT (right side) */
+/* SENT */
 .sent {
   background: #dcf8c6;
   align-self: flex-end;
 }
 
-/* RECEIVED (left side) */
+/* RECEIVED */
 .received {
   background: white;
   align-self: flex-start;
@@ -55,13 +55,13 @@ body {
 .chat-input input {
   flex: 1;
   padding: 10px;
-  border: none;
   border-radius: 20px;
+  border: none;
 }
 
 .chat-input button {
   margin-left: 10px;
-  padding: 10px 15px;
+  padding: 10px;
   background: #075e54;
   color: white;
   border: none;

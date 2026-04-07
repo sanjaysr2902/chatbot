@@ -6,6 +6,7 @@ import {
   query,
   orderBy,
   onSnapshot,
+  serverTimestamp,
 } from "firebase/firestore";
 import "./App.css";
 
@@ -13,27 +14,35 @@ function App() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const user = "Sanjay"; // 👈 change later
-  const gf = "Sarangi";  // 👈 change name
+  const user = "Sanjay";
+  const gf = "Sarangi";
 
+  // 🔥 Real-time listener
   useEffect(() => {
-    const q = query(collection(db, "messages"), orderBy("createdAt"));
+    const q = query(
+      collection(db, "messages"),
+      orderBy("createdAt")
+    );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const msgs = snapshot.docs.map((doc) => doc.data());
+      const msgs = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setMessages(msgs);
     });
 
     return () => unsubscribe();
   }, []);
 
+  // 📤 Send message
   const sendMessage = async () => {
     if (message.trim() === "") return;
 
     await addDoc(collection(db, "messages"), {
       text: message,
       user: user,
-      createdAt: new Date(),
+      createdAt: serverTimestamp(),
     });
 
     setMessage("");
@@ -43,14 +52,14 @@ function App() {
     <div className="chat-container">
       {/* HEADER */}
       <div className="chat-header">
-        <h2>{gf} </h2>
+        <h2>{gf} ❤️</h2>
       </div>
 
       {/* CHAT BODY */}
       <div className="chat-body">
-        {messages.map((msg, i) => (
+        {messages.map((msg) => (
           <div
-            key={i}
+            key={msg.id}
             className={
               msg.user === user ? "message sent" : "message received"
             }
