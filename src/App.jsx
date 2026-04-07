@@ -7,7 +7,7 @@ import {
   orderBy,
   onSnapshot,
 } from "firebase/firestore";
-import "./Tep.css";
+import "./App.css";
 
 function App() {
   const [message, setMessage] = useState("");
