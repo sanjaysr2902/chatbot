@@ -59,7 +59,7 @@ function App() {
 
       {/* HEADER */}
       <div className="chat-header">
-        💙 Chat with Love 💙
+        💙 ss chat app 💙
       </div>
 
       {/* CHAT BODY */}
